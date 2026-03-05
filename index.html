@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nuestra Boda</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:'Playfair Display',serif;
+background:linear-gradient(135deg,#f8f2f6,#f4e7ef,#f8f2f6);
+color:#333;
+text-align:center;
+overflow-x:hidden;
+}
+
+.container{
+padding:40px 20px;
+max-width:700px;
+margin:auto;
+}
+
+h1{
+font-family:'Great Vibes',cursive;
+font-size:55px;
+color:#7c3f67;
+margin-bottom:10px;
+}
+
+.names{
+font-size:30px;
+color:#7c3f67;
+margin:25px 0;
+}
+
+.subtitle{
+font-size:18px;
+margin-bottom:25px;
+}
+
+.details{
+font-size:20px;
+margin:10px 0;
+}
+
+.card{
+background:white;
+padding:40px;
+border-radius:20px;
+box-shadow:0 10px 40px rgba(0,0,0,0.15);
+}
+
+.countdown{
+display:flex;
+justify-content:center;
+gap:15px;
+margin:30px 0;
+flex-wrap:wrap;
+}
+
+.timebox{
+background:#fff;
+padding:15px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.15);
+min-width:70px;
+}
+
+.timebox span{
+display:block;
+font-size:22px;
+font-weight:bold;
+}
+
+button{
+margin-top:20px;
+padding:12px 25px;
+border:none;
+border-radius:30px;
+background:#7c3f67;
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:#5e2e4c;
+}
+
+.petalo{
+position:fixed;
+top:-10px;
+font-size:20px;
+animation:fall linear forwards;
+}
+
+@keyframes fall{
+to{
+transform:translateY(110vh) rotate(360deg);
+}
+}
+
+footer{
+margin-top:30px;
+font-style:italic;
+color:#666;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<h1>¡Nos Casamos!</h1>
+
+<div class="names">
+Jazmany José Martín Alvarado Torres <br>
+& <br>
+Cecilia Lizbeth Cruz Pérez
+</div>
+
+<div class="subtitle">
+Con gran alegría te invitamos a celebrar nuestra boda
+</div>
+
+<div class="details">📅 22 de marzo de 2026</div>
+<div class="details">⏰ 5:00 PM</div>
+<div class="details">📍 Casa de Jazmany</div>
+
+<h2>Faltan:</h2>
+
+<div class="countdown">
+<div class="timebox"><span id="days"></span>Días</div>
+<div class="timebox"><span id="hours"></span>Horas</div>
+<div class="timebox"><span id="minutes"></span>Min</div>
+<div class="timebox"><span id="seconds"></span>Seg</div>
+</div>
+
+<button onclick="openMap()">Ver ubicación</button>
+<br>
+<button onclick="playMusic()">Activar música</button>
+
+<footer>
+Será un honor compartir este momento contigo
+</footer>
+
+</div>
+
+</div>
+
+<audio id="music" loop>
+<source src="https://cdn.pixabay.com/audio/2022/03/15/audio_7c3e0e8a54.mp3">
+</audio>
+
+<script>
+
+// CUENTA REGRESIVA
+
+var weddingDate = new Date("March 22, 2026 17:00:00").getTime();
+
+setInterval(function(){
+
+var now = new Date().getTime();
+var distance = weddingDate - now;
+
+var days = Math.floor(distance/(1000*60*60*24));
+var hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+var minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+var seconds = Math.floor((distance%(1000*60))/1000);
+
+document.getElementById("days").innerHTML=days;
+document.getElementById("hours").innerHTML=hours;
+document.getElementById("minutes").innerHTML=minutes;
+document.getElementById("seconds").innerHTML=seconds;
+
+},1000);
+
+
+// MAPA
+
+function openMap(){
+
+window.open("https://maps.app.goo.gl/sBYskkknh58r9aop8");
+
+}
+
+
+// MUSICA
+
+function playMusic(){
+document.getElementById("music").play();
+}
+
+
+// PETALOS
+
+function crearPetalo(){
+
+var petalo=document.createElement("div");
+petalo.classList.add("petalo");
+petalo.innerHTML="🌸";
+
+petalo.style.left=Math.random()*100+"vw";
+petalo.style.animationDuration=(Math.random()*5+5)+"s";
+
+document.body.appendChild(petalo);
+
+setTimeout(()=>{petalo.remove();},9000);
+
+}
+
+setInterval(crearPetalo,500);
+
+</script>
+
+</body>
+</html>
